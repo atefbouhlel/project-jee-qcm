@@ -1,0 +1,38 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Liste de questionnaires</h4>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table">
+              <thead class="text-danger">
+              <tr>
+                <th>Nom</th>
+                <th>Thème</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Difficulté</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let qcm of qcmsList">
+                <td>{{qcm.name}}</td>
+                <td>{{qcm.theme}}</td>
+                <td>{{qcm.startdate}}</td>
+                <td>{{qcm.enddate}}</td>
+                <td>2</td>
+              </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

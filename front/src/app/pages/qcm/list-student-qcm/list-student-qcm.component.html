@@ -1,0 +1,45 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Liste de questionnaires</h4>
+            <p class="category">Here is a subtitle for this table</p>
+          </div>
+          <div class="card-content table-responsive">
+            <table class="table">
+              <thead class="text-danger">
+              <tr>
+                <th>Nom</th>
+                <th>Thème</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Difficulté</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let qcm of qcmsList">
+                <td>{{qcm.name}}</td>
+                <td>{{qcm.theme}}</td>
+                <td>{{qcm.startdate}}</td>
+                <td>{{qcm.enddate}}</td>
+                <td>{{qcm.difficulty}}</td>
+                <td class="td-actions text-right">
+                  <button type="button" (click)="answerQcm(qcm)" rel="tooltip" title="Modifier" class="btn btn-primary btn-simple btn-xs">
+                    <i class="material-icons">edit</i> Répondre
+                  </button>
+                </td>
+              </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

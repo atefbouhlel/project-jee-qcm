@@ -1,0 +1,88 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Créer un nouveau QCM</h4>
+            <!--<p class="category">Complete your profile</p>-->
+          </div>
+          <div class="card-content">
+            <form  #configForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label class="control-label">Nom</label>
+                    <input type="text" class="form-control" name="name" required [(ngModel)]="newQcm.name" #name="ngModel">
+                    <div [hidden]="name.valid || name.pristine"
+                         class="alert alert-danger">
+                      Nom est obligatoire.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label class="control-label">Thème</label>
+                    <input type="text" class="form-control" name="theme" required [(ngModel)]="newQcm.theme" #theme="ngModel">
+                    <div [hidden]="theme.valid || theme.pristine"
+                         class="alert alert-danger">
+                      Theme est obligatoire.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label class="control-label">Niveau de difficulté</label>
+                    <input type="text" class="form-control" pattern= "[0-9]" name="difficulty" required [(ngModel)]="newQcm.difficulty" #difficulty="ngModel">
+                    <div [hidden]="difficulty.valid || difficulty.pristine"
+                         class="alert alert-danger">
+                      la difficulté est obligatoire. [0-9]
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label class="control-label label-above">Date de début</label>
+                    <my-date-picker name="startDate" [options]="myDatePickerOptions"
+                                    [(ngModel)]="startDate">
+
+                    </my-date-picker>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-black label-floating is-empty">
+                    <label class="control-label label-above">Date de fin</label>
+                    <my-date-picker name="endDate" [options]="myDatePickerOptions"
+                                    [(ngModel)]="endDate">
+
+                    </my-date-picker>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <div class="form-group form-black label-floating is-empty" style="margin-top: -15px">
+                      <textarea class="form-control" rows="2"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-danger pull-right" [disabled]="!configForm.form.valid">Suivant</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

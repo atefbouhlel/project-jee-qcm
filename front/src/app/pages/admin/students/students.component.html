@@ -1,0 +1,261 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-lg-12 col-md-12">
+        <div class="card card-nav-tabs" >
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Gestion des étudiants</h4>
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="active">
+                    <a href="#studentsList" data-toggle="tab">
+                      <i class="material-icons">list</i>
+                      Liste des étudiants
+                      <div class="ripple-container"></div></a>
+                  </li>
+                  <li class="">
+                    <a href="#newStudent" data-toggle="tab">
+                      <i class="material-icons">add</i>
+                      Ajouter un étudiant
+                      <div class="ripple-container"></div></a>
+                  </li>
+                  <li class="">
+                    <a href="#newStudentsExcel" data-toggle="tab">
+                      <i class="material-icons">file_upload</i>
+                      Ajouter des étudiants à partir d'un excel
+                      <div class="ripple-container"></div></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-content">
+            <div class="tab-content">
+              <div class="tab-pane active" id="studentsList">
+                <table class="table table-hover">
+                  <thead class="text-warning">
+                  <tr>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let student of studentsList">
+                    <td>{{student.username}}</td>
+                    <td>{{student.firstName}} {{student.lastName}}</td>
+                    <td>{{student.adress}}</td>
+                    <td class="td-actions text-right">
+                      <button type="button" (click)="updateStudentPopup(student)" rel="tooltip" title="Modifier" class="btn btn-primary btn-simple btn-xs">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button type="button" (click)="deleteStudentPopup(student)" rel="tooltip" title="Supprimer" class="btn btn-danger btn-simple btn-xs">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="newStudent">
+                <form #newStudentForm="ngForm" (ngSubmit)="createStudent()">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group form-black label-floating is-empty">
+                        <label class="control-label">Prénom</label>
+                        <input type="text" class="form-control"
+                               name="firstname" required [(ngModel)]="newStudent.firstName" #firstname="ngModel">
+                        <div [hidden]="firstname.valid || firstname.pristine"
+                             class="alert alert-danger">
+                          Le prénom est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group form-black label-floating is-empty">
+                        <label class="control-label">Nom</label>
+                        <input type="text" class="form-control"
+                               name="lastname" required [(ngModel)]="newStudent.lastName" #lastname="ngModel">
+                        <div [hidden]="lastname.valid || lastname.pristine"
+                             class="alert alert-danger">
+                          Le nom est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group form-black label-floating is-empty">
+                        <label class="control-label">Email</label>
+                        <input type="email" class="form-control"
+                               name="email" required [(ngModel)]="newStudent.email" #email="ngModel">
+                        <div [hidden]="email.valid || email.pristine"
+                             class="alert alert-danger">
+                          L'email est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group form-black label-floating is-empty">
+                        <label class="control-label label-above" >Pseudo</label>
+                        <input type="text" class="form-control"
+                               name="username"  [(ngModel)]="newStudent.username" #username="ngModel">
+                        <!--required-->
+                        <!--value="{{newStudent.firstName | lowercase}}.{{newStudent.lastName | lowercase}}"-->
+                        <div [hidden]="username.valid || username.pristine"
+                             class="alert alert-danger">
+                          Le pseudo est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group form-black label-floating is-empty">
+                        <label class="control-label">Adresse</label>
+                        <input type="text" class="form-control"
+                               name="adress" required [(ngModel)]="newStudent.adress" #adress="ngModel">
+                        <div [hidden]="adress.valid || adress.pristine"
+                             class="alert alert-danger">
+                          L'adresse est obligatoire.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <button type="submit" class="btn btn-danger pull-right" [disabled]="!newStudentForm.form.valid">Ajouter</button>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+              <div class="tab-pane" id="newStudentsExcel">
+                <table class="table">
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="optionsCheckboxes">
+                        </label>
+                      </div>
+                    </td>
+                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="optionsCheckboxes" checked>
+                        </label>
+                      </div>
+                    </td>
+                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                    </td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="optionsCheckboxes">
+                        </label>
+                      </div>
+                    </td>
+                    <td>Sign contract for "What are conference organizers afraid of?"</td>
+                    <td class="td-actions text-right">
+                      <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                        <i class="material-icons">edit</i>
+                      </button>
+                      <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--modal template for the edit and delete buttons-->
+        <popup (confirmClick)="updateStudent()" #updateTemplate>
+          <form #updateStudentForm="ngForm" >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label label-above">Prénom</label>
+                  <input type="text" class="form-control"
+                         name="firstnameU" required [(ngModel)]="selectedStudent.firstName" >
+
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label label-above">Nom</label>
+                  <input type="text" class="form-control"
+                         name="lastnameU" required [(ngModel)]="selectedStudent.lastName">
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label label-above">Email</label>
+                  <input type="email" class="form-control"
+                         name="emailU" required [(ngModel)]="selectedStudent.email">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label label-above" style="top: -28px !important; font-size: 11px !important;">Pseudo</label>
+                  <input type="text" class="form-control"
+                         name="usernameU" required [(ngModel)]="selectedStudent.username" >
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group form-black label-floating is-empty">
+                  <label class="control-label label-above">Adresse</label>
+                  <input type="text" class="form-control"
+                         name="adress" required [(ngModel)]="selectedStudent.adress">
+                </div>
+              </div>
+            </div>
+          </form>
+        </popup>
+        <popup (confirmClick)="deleteStudent()" #deleteTemplate>
+          <p>Vous êtes sûr de supprimer {{selectedStudent.username}} ?</p>
+        </popup>
+        <popup #successTemplate (confirmClick)="successTemplate.hide()">
+          <p>Ajout Réussi !</p>
+        </popup>
+      </div>
+    </div>
+  </div>
+</div>

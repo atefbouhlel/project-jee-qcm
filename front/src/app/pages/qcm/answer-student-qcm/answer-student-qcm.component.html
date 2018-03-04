@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="card card-nav-tabs" >
+          <div class="card-header" data-background-color="red">
+            <h4 class="title" *ngIf="isValidated == 0">Répondre aux questions</h4>
+            <h4 class="title" *ngIf="isValidated == 1">Score</h4>
+            <!--<p class="category">Complete your profile</p>-->
+          </div>
+          <div class="card-content">
+            <ng-container *ngIf="isValidated == 0">
+              <form  #answersForm="ngForm" (ngSubmit)="onSubmit()">
+              <div class="row dashed-border" *ngFor="let question of answerQcm.questions; let i = index">
+                <div class="col-md-12">
+                  <div class="form-group form-black label-floating is-empty">
+                    <p class="question-index">Question {{i+1}}</p>
+                    <!--<input type="text" class="form-control" required [(ngModel)]="question.content" [ngModelOptions]="{standalone: true}">-->
+                      <p>
+                        {{question.content}}
+                      </p>
+                    <table class="answers">
+                      <tbody>
+                      <tr *ngFor="let answer of question.answers; let j = index">
+                        <td>
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" [(ngModel)]="this.questionsAnswer[i].answers[j].iscorrect" [ngModelOptions]="{standalone: true}">
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <!--<input type="text" class="form-control" required [(ngModel)]="answer.content" [ngModelOptions]="{standalone: true}">-->
+                          <p>{{answer.content}}</p>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+
+              <input type="submit" class="btn btn-danger pull-right" value="Valider">
+            </form>
+            </ng-container>
+            <ng-container *ngIf="isValidated == 1">
+              <p> Votre score est {{score}}</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

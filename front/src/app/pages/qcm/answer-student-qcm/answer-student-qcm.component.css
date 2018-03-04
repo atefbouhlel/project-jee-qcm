@@ -1,0 +1,11 @@
+.answers{
+  margin-left: 40pt;
+}
+
+.dashed-border{
+  border-bottom: 5px dashed #D2D2D2;
+}
+
+.question-index{
+  top: -41px; font-size: 16px; line-height: 1.42857; color: #AAAAAA;
+}

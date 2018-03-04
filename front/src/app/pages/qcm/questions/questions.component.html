@@ -1,0 +1,56 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="card card-nav-tabs" >
+          <div class="card-header" data-background-color="red">
+            <h4 class="title">Créer un nouveau QCM</h4>
+            <!--<p class="category">Complete your profile</p>-->
+          </div>
+            <div class="card-content">
+              <form  #questionsForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="row dashed-border" *ngFor="let question of newQcm.questions">
+                  <div class="col-md-12">
+                    <div class="form-group form-black label-floating is-empty">
+                      <label class="control-label">Question</label>
+                      <input type="text" class="form-control" required [(ngModel)]="question.content" [ngModelOptions]="{standalone: true}">
+
+                      <table class="answers">
+                        <tbody>
+                        <tr *ngFor="let answer of question.answers">
+                          <td>
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" [(ngModel)]="answer.iscorrect" [ngModelOptions]="{standalone: true}">
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" required [(ngModel)]="answer.content" [ngModelOptions]="{standalone: true}">
+                          </td>
+                          <td class="td-actions text-right">
+                            <button type="button" (click)="deleteAnswer(question, answer)" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                      <div class="text-center">
+                      <button type="button" (click)="addAnswer(question)" class="btn btn-primary btn-xs" >Ajouter réponse</button>
+                      <button type="button" (click)="deleteQuestion(question)" class="btn btn-danger btn-xs" >Supprimer question</button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" (click)="addQuestion()" class="btn btn-default pull-left" >Ajouter question</button>
+                <input type="submit" class="btn btn-danger pull-right" [disabled]="this.qcmService.newQcm.questions.length == 0 && !questionsForm.form.valid" value="Suivant">
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
