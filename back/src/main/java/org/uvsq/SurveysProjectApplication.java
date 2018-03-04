@@ -62,7 +62,7 @@ public class SurveysProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		//initDatabase();
+		initDatabase();
 		
 		qcmRepository.findAll().forEach(qcm -> {
 			System.out.println(qcm.getName());
