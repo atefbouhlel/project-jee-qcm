@@ -1,5 +1,10 @@
 # project-jee-qcm
+### Default Profiles
+* Etudiant (username: student1, mdp: student)
+* Enseignant (username: prof, mdp: prof)
+* Admin (username: admin, mdp: admin)
 
+### Steps
 #### Step 1. Set up the Development Environment for Angular
 
 You need to set up your development environment before you can do anything.
